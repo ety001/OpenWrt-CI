@@ -72,7 +72,6 @@ jobs:
         run: |
           cd ./Scripts
 
-          dos2unix ./*.sh
           chmod +x ./*.sh
 
       - name: Clone OWRT Code
