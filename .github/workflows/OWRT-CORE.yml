@@ -48,8 +48,9 @@ jobs:
       - name: Initialization Environment
         env:
           DEBIAN_FRONTEND: noninteractive
+        #run: |
+          #$GITHUB_WORKSPACE/Scripts/Clear.sh
         run: |
-          $GITHUB_WORKSPACE/Scripts/Clear.sh
           sudo -E rm -rf $(cat $GITHUB_WORKSPACE/Depends.txt | sed -n "1{s/\r$//;p;q}")
           sudo -E apt -y update
           sudo -E apt -y install $(cat $GITHUB_WORKSPACE/Depends.txt | sed -n "3{s/\r$//;p;q}")
