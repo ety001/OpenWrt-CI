@@ -40,16 +40,21 @@ jobs:
       - name: Checkout Projects
         uses: actions/checkout@main
 
+      - name: Check Scripts
+        run: |
+          cd ./Scripts
+          chmod +x ./*.sh
+
       - name: Initialization Environment
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
-          docker images -q | xargs -r docker rmi
+          $GITHUB_WORKSPACE/Scripts/Clear.sh
           sudo -E rm -rf $(cat $GITHUB_WORKSPACE/Depends.txt | sed -n "1{s/\r$//;p;q}")
           sudo -E apt -y update
           sudo -E apt -y install $(cat $GITHUB_WORKSPACE/Depends.txt | sed -n "3{s/\r$//;p;q}")
           sudo -E systemctl daemon-reload
-          
+
       - name: Initialization Values
         run: |
           export OWRT_DATE=$(TZ=UTC-8 date +"%y.%m.%d_%H.%M.%S")
@@ -62,12 +67,6 @@ jobs:
           echo "OWRT_TYPE=$OWRT_TYPE" >> $GITHUB_ENV
           echo "OWRT_PW=$OWRT_PW" >> $GITHUB_ENV
           echo "OWRT_IP=$OWRT_IP" >> $GITHUB_ENV
-
-      - name: Check Scripts
-        run: |
-          cd ./Scripts
-
-          chmod +x ./*.sh
 
       - name: Clone OWRT Code
         run: |
