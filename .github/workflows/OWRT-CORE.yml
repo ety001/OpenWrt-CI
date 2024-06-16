@@ -72,12 +72,10 @@ jobs:
           echo "OWRT_IP=$OWRT_IP" >> $GITHUB_ENV
 
       - name: Clone OWRT Code
+        #run: |
+        #  git clone $OWRT_URL ./owrt
         run: |
-          curl ip.sb
-          echo $OWRT_URL
-          echo $HTTP_PROXY
-          echo $HTTPS_PROXY
-          git clone $OWRT_URL ./owrt
+          cp -r /home/ety001/lede ./owrt
       
       - name: Fix AX6
         run: |
