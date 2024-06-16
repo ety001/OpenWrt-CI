@@ -32,6 +32,8 @@ env:
   OWRT_URL: ${{inputs.OWRT_URL}}
   OWRT_PW: ${{inputs.OWRT_PW}}
   OWRT_IP: ${{inputs.OWRT_IP}}
+  HTTP_PROXY: http://127.0.0.1:8001
+  HTTPS_PROXY: http://127.0.0.1:8001
 
 jobs:
   owrt_core:
@@ -72,10 +74,8 @@ jobs:
           echo "OWRT_IP=$OWRT_IP" >> $GITHUB_ENV
 
       - name: Clone OWRT Code
-        #run: |
-        #  git clone $OWRT_URL ./owrt
         run: |
-          cp -r /home/ety001/lede ./owrt
+          git clone $OWRT_URL ./owrt
       
       - name: Fix AX6
         run: |
