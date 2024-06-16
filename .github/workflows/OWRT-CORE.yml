@@ -75,6 +75,8 @@ jobs:
         run: |
           curl ip.sb
           echo $OWRT_URL
+          echo $HTTP_PROXY
+          echo $HTTPS_PROXY
           git clone $OWRT_URL ./owrt
       
       - name: Fix AX6
