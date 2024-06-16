@@ -73,6 +73,8 @@ jobs:
 
       - name: Clone OWRT Code
         run: |
+          curl ip.sb
+          echo $OWRT_URL
           git clone $OWRT_URL ./owrt
       
       - name: Fix AX6
