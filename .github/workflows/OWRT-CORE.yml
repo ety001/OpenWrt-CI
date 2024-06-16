@@ -55,6 +55,8 @@ jobs:
           sudo -E apt -y update
           sudo -E apt -y install $(cat $GITHUB_WORKSPACE/Depends.txt | sed -n "3{s/\r$//;p;q}")
           sudo -E systemctl daemon-reload
+          git config --global http.version HTTP/1.1
+          git config --global http.postBuffer 157286400
 
       - name: Initialization Values
         run: |
